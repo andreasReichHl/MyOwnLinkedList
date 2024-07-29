@@ -36,7 +36,7 @@ public class Main {
 
         LinkedList<String> newStudents = new LinkedList<>();
         newStudents.add("George");
-        newStudents.add("Hannae");
+        newStudents.add("Hannah");
 
         students.addAll(newStudents);
         System.out.println("Sortierte LinkedList:");
