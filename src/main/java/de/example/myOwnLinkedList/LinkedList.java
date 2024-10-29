@@ -1,18 +1,18 @@
 package de.example.myOwnLinkedList;
 
-public class LinkedList {
-    private Node head;
+public class LinkedList<E> {
+    private Node<E> head;
 
     public LinkedList() {
 
     }
 
-    public Node getHead() {
+    public Node<E> getHead() {
         return head;
     }
 
-    public void add(int data) {
-        Node newNode = new Node(data);
+    public void add(E item) {
+        Node<E> newNode = new Node<>(item);
         if (head == null) {
             head = newNode;
             return;
@@ -25,17 +25,17 @@ public class LinkedList {
         }
     }
 
-    public void add(int index, int data) {
+    public void add(int index, E item) {
         if (index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index);
         }
 
-        Node newNode = new Node(data);
+        Node<E> newNode = new Node<>(item);
         if (index == 0) {
             newNode.next = head;
             head.next = newNode;
         } else {
-            Node current = head;
+            Node<E> current = head;
             for (int i = 0; i < index - 1; i++) {
                 if (current == null) throw new IndexOutOfBoundsException("Index:" + index);
                 current = current.next;
@@ -45,7 +45,13 @@ public class LinkedList {
         }
     }
 
-    private Node getLastElement() {
+    public void addFirst(E item) {
+        Node<E> newNode = new Node<>(item);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    private Node<E> getLastElement() {
         Node current = head;
         while (current != null) current = current.next;
         return current;
@@ -62,7 +68,7 @@ public class LinkedList {
         return size;
     }
 
-    public Node getElement(int i) {
+    public Node<E> getElement(int i) {
         if (head == null || i > size()) throw new IndexOutOfBoundsException();
         Node current = head;
         int index = 0;
@@ -73,13 +79,18 @@ public class LinkedList {
         return current;
     }
 
-    public void printAll() {
-        Node current = head;
-//            System.out.println(size());
+    public StringBuilder printAll() {
+        Node<E> current = head;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Elemente der LinkedList: ");
+        sb.append("\n");
         for (int i = 0; i < size(); i++) {
-            System.out.println(current.data);
+            sb.append("index: " + i + "| ");
+            sb.append(current.toString());
+            sb.append("\n");
             current = current.next;
         }
+        return sb;
     }
 
     public void remove(int index) {
@@ -88,13 +99,35 @@ public class LinkedList {
         if (index == 0) {
             head = head.next;
         } else {
-            Node current = head;
+            Node<E> current = head;
             for (int i = 0; i < index - 1; i++) {
                 if (current == null) throw new IndexOutOfBoundsException("Index:" + index);
                 current = current.next;
             }
-            if (current == null) throw new IndexOutOfBoundsException("Index:" + index);
+            if (current.next == null) throw new IndexOutOfBoundsException("Index:" + index);
             current.next = current.next.next;
         }
+
+    }
+
+    public void removeLast() {
+        if (head == null) throw new IndexOutOfBoundsException();
+        int indexLast = size() - 1;
+        remove(indexLast);
+    }
+
+    public void reverse() {
+        Node<E> prev = null;
+        Node<E> current = head;
+        Node<E> next = null;
+
+        head.next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
     }
 }

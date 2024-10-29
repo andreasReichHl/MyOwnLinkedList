@@ -2,25 +2,30 @@ package de.example.myOwnLinkedList;
 
 public class Main {
     public static void main(String[] args) {
+        // Implementierung einer LinkedLIst
+        // Folgende Methode sind implementiert:
+        // add(item), getElement(index), remove(index), removeLast(),
+        // printAll()
 
-        LinkedList myOwnList = new LinkedList();
-        myOwnList.add(1);
-        myOwnList.add(3);
-        myOwnList.add(45);
-        myOwnList.add(60);
+        LinkedList<String> myOwnList = new LinkedList<>();
+        myOwnList.add("Andreas");
+        myOwnList.add("Christian");
+        myOwnList.add("Superman");
+        myOwnList.add("Wonderwoman");
+//        System.out.println(myOwnList.printAll());
 
 //        System.out.println(myOwnList.getElement(2));
 
-        myOwnList.add(2, 66);
-        System.out.println(myOwnList.size());
-//        myOwnList.printAll();
+        myOwnList.add(2, "Flash");
+//        System.out.println(myOwnList.printAll());
+        myOwnList.addFirst("Batman");
 
-        myOwnList.remove(0);
-        myOwnList.printAll();
-//        System.out.println(myOwnList.getElement(1));
-//        System.out.println(myOwnList.getHead());
+//        myOwnList.remove(4);
+//        myOwnList.removeLast();
+//        System.out.println(myOwnList.printAll());
+        myOwnList.reverse();
+        System.out.println(myOwnList.printAll());
 
-//        java.util.LinkedList<Integer> integerLinkedList = new java.util.LinkedList<>();
-//        integerLinkedList.add(2,13);
+
     }
 }
